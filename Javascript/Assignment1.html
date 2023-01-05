@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1</title>
+</head>
+
+<body>
+    <section>
+        <h1>Registration Form</h1>
+        <form onsubmit="return validateForm()" novalidate>
+            <table>
+                <tbody>
+                    <tr>    
+                        <td><label for="name">Name:</label></td>
+                        <td><input id="name" name="name" onblur="validateName()"></td>
+                    </tr>
+                    <tr><td></td><td id="errorName"></td></tr>
+                    <tr>
+                        <td><label for="mail">Email: </label></td>
+                        <td><input type="email" id="mail" onblur="validateMail()"></td>
+                    </tr>
+                    <tr><td></td><td id="errorMail"></td></tr>
+                    <tr>
+                        <td><label for="password">Set Password: </label></td>
+                        <td><input type="text" id="password" onblur="validatePassword()"></td>
+                    </tr>
+                    <tr><td></td><td id="errorPassword"></td></tr>
+                    <tr>
+                        <td><label for="confirmPass">Confirm Password: </label></td>
+                        <td><input type="password" id="confirmPass" onblur="validateConfirmPass()"></td>
+                    </tr>
+                    <tr><td></td><td id="errorConfirmPass"></td></tr>
+                    <tr>
+                        <td><label for="gender">Gender:</label></td>
+                        <td>
+                            <input onblur="validateGender()" onchange="validateGender()" id="male" name="gender" type="radio" value="Male"><label for="male">Male</label>
+                            <input onblur="validateGender()" onchange="validateGender()" id="female" name="gender" type="radio" value="Female"><label for="female">Female</label>
+                        </td>
+                    </tr>
+                    <tr><td></td><td id="errorGender"></td></tr>
+                    <tr>
+                        <td><label for="hobbies">Hobbies:</label></td>
+                        <td>
+                            <input onblur="validateHobbies()" onchange="validateHobbies()" id="cricket" name="hobbies" type="checkbox" value="Cricket"><label for="cricket">Cricket</label>
+                            <input onblur="validateHobbies()" onchange="validateHobbies()" id="tableTennis" name="hobbies" type="checkbox" value="TableTennis"><label for="tableTennis">TableTennis</label>
+                            <input onblur="validateHobbies()" onchange="validateHobbies()" id="footBall" name="hobbies" type="checkbox" value="FootBall"><label for="footBall">FootBall</label>
+                            <input onblur="validateHobbies()" onchange="validateHobbies()" id="badminton" name="hobbies" type="checkbox" value="Badminton"><label for="badminton">Badminton</label>
+                        </td>
+                    </tr>
+                    <tr><td></td><td id="errorHobbies"></td></tr>
+                    <tr>
+                        <td><label for="remarks">Remarks:</label></td>
+                        <td><textarea id="remarks" name="remarks" onblur="validateRemarks()"></textarea></td>
+                    </tr>
+                    <tr><td></td><td id="errorRemarks"></td></tr>
+                    <tr>
+                        <td><label for="city">City:</label></td>
+                        <td>
+                            <select id="city" name="city" onblur="validateCity()" onchange="validateCity()">
+                                <option value="">-Select City-</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Thane">Thane</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td></td><td id="errorCity"></td></tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="REGISTER"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </section>
+    <script>
+        let nameNode=document.getElementById("name");
+        let emailNode=document.getElementById("mail");
+        let passNode=document.getElementById("password");
+        let confirmPassNode=document.getElementById("confirmPass");
+        let remarksNode=document.getElementById("remarks");
+        let cityNode=document.getElementById("city");
+        let errorNodeName=document.getElementById("errorName");
+        let errorNodeMail=document.getElementById("errorMail");
+        let errorNodePassword=document.getElementById("errorPassword");
+        let errorNodeConfirmPass=document.getElementById("errorConfirmPass");
+        let errorNodeGender=document.getElementById("errorGender");
+        let errorNodeHobbies=document.getElementById("errorHobbies");
+        let errorNodeRemarks=document.getElementById("errorRemarks");
+        let errorNodeCity=document.getElementById("errorCity");
+        let array=[errorNodeName,errorNodeCity,errorNodeGender,errorNodeHobbies,errorNodeMail,errorNodeRemarks,errorNodePassword,errorNodeConfirmPass];
+        for(let node of array){
+            node.style.color="red";
+        }
+
+        function validateName(){
+            let name=nameNode.value;
+            let regex=new RegExp("^[A-Za-z]*$");
+            if(name===''){
+                errorNodeName.innerHTML="<small>Name is required.</small>";
+                return false;
+            }
+            else if(regex.test(name)==false){
+                errorNodeName.innerHTML="<small>Name must have only alphabets</small>";
+                return false;
+            }
+            else{
+                errorNodeName.innerHTML="";
+                return true;
+            }
+        }
+        function validateMail(){
+            let email=emailNode.value;
+            if(email===''){
+                errorNodeMail.innerHTML="<small>Email is required.</small>";
+                return false;
+            }
+            else if(!email.includes('@') || email.endsWith('@')){
+                errorNodeMail.innerHTML="<small>Please enter valid email</small>";
+                return false;
+            }
+            else{
+                errorNodeMail.innerHTML="";
+                return true;
+            }
+        }
+        function validatePassword(){
+            let pass=passNode.value;
+            if(pass===''){
+                errorNodePassword.innerHTML="<small>Password is required.</small>";
+                return false;
+            }
+            else if(pass.length < 8 || pass.length > 20){
+                errorNodePassword.innerHTML="<small>Password should be 8 to 20 characters long.</small>";
+                return false;
+            }
+            else{
+                errorNodePassword.innerHTML = "";
+                return true;
+            }
+        }
+        function validateConfirmPass(){
+            let c_pass=confirmPassNode.value;
+            if(c_pass===''){
+                errorNodeConfirmPass.innerHTML="<small>Confirm Password is required.</small>";
+                return false;
+            }
+            else if (c_pass!=pass) {
+                errorNodeConfirmPass.innerHTML="<small>Confirm Password is different from Password.</small>";
+                return false;
+            } else {
+                errorNodeConfirmPass.innerHTML = "";
+                return true;
+            }
+        }
+        function validateRemarks(){
+            let remarks=remarksNode.value;
+            if(remarks.length > 20){
+                errorNodeRemarks.innerHTML="<small>Remarks can't be longers than 20 characters.</small>";
+                return false;
+            }
+            else{
+                errorNodeRemarks.innerHTML="";
+                return true;
+            }
+        }
+        function validateCity(){
+            let city=cityNode.value;
+            if(city===''){
+                errorNodeCity.innerHTML="<small>City is required.</small>";
+                return false;
+            }
+            else{
+                errorNodeCity.innerHTML="";
+                return true;
+            }
+        }
+        function validateGender(){
+            let gender=document.querySelectorAll("input[type='radio'][name='gender']:checked");
+            if(gender.length==0){
+                errorNodeGender.innerHTML="<small>Gender is required.</small>";
+                return false;
+            }
+            else{
+                errorNodeGender.innerHTML="";
+                return true;
+            }
+        }
+        function validateHobbies(){
+            let hobbies=document.querySelectorAll("input[type='checkbox'][name='hobbies']:checked");
+            if(hobbies.length==0){
+                errorNodeHobbies.innerHTML="<small>Hobbies is required.</small>";
+                return false;
+            }
+            else{
+                errorNodeHobbies.innerHTML="";
+                return true;
+            }
+        }
+
+        function validateForm() {
+            let vName = validateName();
+            let vMail = validateMail();
+            let vPassword = validatePassword();
+            let vConfirmPass = validateConfirmPass();
+            let vRemarks = validateRemarks();
+            let vCity = validateCity();
+            let vGender = validateGender();
+            let vHobbies = validateHobbies();
+            return (vName && vMail && vPassword && vConfirmPass && vRemarks && vCity && vGender && vHobbies);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,43 @@
+--> Javascript : It is a client side scripting language which is used to apply some dynamic features inn our web pages like some animations, event handling, validations, etc.
+--> With the help of Javascript we can perform run time dom manipulation.
+--> Javascript is known as ECMAScript(ES)
+--> ES 5 (Vanilla Javascript(old Javascript))
+--> ES6 : Javascript introduced some new features
+    --> Normal Javascript
+        --> variables, operators, conditions, loop, array, functions, Event Handling, DOM manipulation, validations, Intervals(setInterval, setTimeOut)
+        --> Object : we can store data in the form of key value pair.
+            var obj = {
+                fname : `Malay`,
+                lname : `Satiya`,
+                fullname : function(){
+                    return `${this.fname} ${this.lname}`
+                }
+            }
+            console.log(obj.fname);
+            console.log(obj.fullname);
+        --> ES 6 (ECMAScript 2015/16)
+            --> let keyword(blocked scope) : we can define variables within a scope.
+            --> const keyword : we can define constant with const keyword; readonly value(convention Capital letters)
+            --> arrow function(=>) : code is short and concise.
+            --> Template Literal : within a bactick symbol(``) we can render string as well as variables.
+            --> Spread Operator(...) : It is used to spread or copy array or object into other array or object.
+            --> Rest Parameter(...) : we can pass n number of arguments in a function.
+            Limitation is that rest parameters is the last formal parameters of the function.
+            
+            --> class keyword
+            --> Getters and Setters : define the getters and setters for a class using get and set keyword.
+            --> static methods : are called with the class name not from the object of a class.
+            --> Inheritance : reusability using extends and super keywords.
+            --> Destructuring : It allows us to destructure an array or object into individual variables.
+                --> Array Destructuring : 
+                    let nums = [1, 2, 3];
+                    let [n1, n2, n3] = nums;
+                --> Object Destructuring : 
+                    let fullName = {
+                        fname : `Malay`,
+                        lname : `Satiya`
+                    }
+                    let {fname, lname } = fullName;
+                --> Modules : How we export variables, functions, classes from modules. Reuse them in other modules.
+                import and export keywords are used and give script tag's type as module 
+                    
